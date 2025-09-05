@@ -1,61 +1,31 @@
+/* 前回と同じ、.minecraft-imgあり */
 * {margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #0e0f14, #1a1c2b);
-  color: #fff;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-
-a {text-decoration:none;color:#4ac9ff;}
-h1,h2,h3 {margin-bottom:15px;text-shadow:0 0 10px rgba(0,0,0,0.7);}
-h2 {
-  font-size:2.2em;
-  margin-bottom:25px;
-  background: linear-gradient(90deg,#4ac9ff,#50e3c2,#ff6ec7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation:textGlow 2.5s ease-in-out infinite alternate;
-  transition: text-shadow 0.4s ease;
-}
-@keyframes textGlow {
-  0%{text-shadow:0 0 5px #4ac9ff,0 0 10px #50e3c2;}
-  50%{text-shadow:0 0 15px #4ac9ff,0 0 20px #50e3c2,0 0 25px #ff6ec7;}
-  100%{text-shadow:0 0 5px #ff6ec7,0 0 10px #50e3c2;}
-}
-
+body {font-family: 'Arial', sans-serif;background: linear-gradient(135deg,#0e0f14,#1a1c2b);color: #fff;overflow-x:hidden;scroll-behavior:smooth;}
+a{text-decoration:none;color:#4ac9ff;}
+h1,h2,h3{margin-bottom:15px;text-shadow:0 0 10px rgba(0,0,0,0.7);}
+h2{font-size:2.2em;margin-bottom:25px;background: linear-gradient(90deg,#4ac9ff,#50e3c2,#ff6ec7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:textGlow 2.5s ease-in-out infinite alternate;}
+@keyframes textGlow{0%{text-shadow:0 0 5px #4ac9ff,0 0 10px #50e3c2;}50%{text-shadow:0 0 15px #4ac9ff,0 0 20px #50e3c2,0 0 25px #ff6ec7;}100%{text-shadow:0 0 5px #ff6ec7,0 0 10px #50e3c2;}}
 p,li{font-size:1.1em;margin-bottom:15px;line-height:1.6;}
 ul{margin:10px 0 20px 20px;}
-
 header{position:relative;text-align:center;padding:120px 20px;background:linear-gradient(135deg,#0d0f1a,#1a1c2b);}
 header h1{font-size:3em;color:#50e3c2;text-shadow:2px 2px 15px #4a90e2;}
-
 nav{margin-top:25px;display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
 nav a{padding:10px 18px;border-radius:25px;font-weight:bold;transition:0.3s;background:rgba(255,255,255,0.05);}
 nav a:hover{background:rgba(255,255,255,0.2);}
-
 #bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
 section{padding:120px 20px;max-width:1000px;margin:0 auto;text-align:center;}
 .profile-card{background:rgba(255,255,255,0.08);padding:35px;border-radius:25px;display:inline-block;box-shadow:0 20px 50px rgba(0,0,0,0.7);width:95%;max-width:750px;margin:auto;transition:0.5s;}
 .profile-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 30px 70px rgba(0,0,0,0.8);}
-
 .skill-list{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:25px;}
 .skill-item{background:rgba(74,201,255,0.25);padding:12px 25px;border-radius:18px;box-shadow:0 7px 20px rgba(0,0,0,0.4);transition:0.3s;}
 .skill-item:hover{transform:scale(1.1);background:rgba(74,201,255,0.45);}
-
 .valorant-img{width:200px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.6);margin-bottom:20px;transition:transform 0.3s;}
 .valorant-img:hover{transform:scale(1.05) rotate(-2deg);}
-
+.minecraft-img{width:120px;height:120px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.6);margin-bottom:15px;}
 .btn{display:inline-block;padding:14px 30px;font-size:1.1em;background:linear-gradient(135deg,#50e3c2,#4a90e2);color:white;border-radius:50px;font-weight:bold;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:0.4s;}
 .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 35px rgba(74,201,255,0.7);}
-
 .fade{opacity:0;transform:translateY(40px);transition:1s ease;}
 .fade.show{opacity:1;transform:translateY(0);}
 .skill-text{opacity:0;transform:translateX(-30px);transition:all 0.6s ease;}
-
 footer{background:#111;color:white;text-align:center;padding:40px 20px;font-size:0.9em;}
-@media(max-width:768px){
-  h2{font-size:2em;}
-  header h1{font-size:2.2em;}
-  .skill-list{flex-direction:column;}
-}
+@media(max-width:768px){h2{font-size:2em;}header h1{font-size:2.2em;}.skill-list{flex-direction:column;}}
