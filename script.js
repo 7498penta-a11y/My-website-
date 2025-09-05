@@ -52,28 +52,6 @@ window.addEventListener('scroll',()=>{
   });
 });
 
-// セクション背景スクロール連動
-const sections=document.querySelectorAll('section');
-window.addEventListener('scroll',()=>{
-  const scrollPos = window.scrollY + window.innerHeight/2;
-  sections.forEach(sec=>{
-    const top = sec.offsetTop;
-    const height = sec.offsetHeight;
-    if(scrollPos>=top && scrollPos<=top+height){
-      let color1='#0e0f14', color2='#1a1c2b';
-      if(sec.id==='about'){color1='#0e0f14'; color2='#1a1c2b';}
-      if(sec.id==='minecraft'){color1='#071a0a'; color2='#0d2b1d';}
-      if(sec.id==='valorant'){color1='#1a0e0f'; color2='#2b1011';}
-      if(sec.id==='skills'){color1='#0e101a'; color2='#1b1c2d';}
-      if(sec.id==='youtube'){color1='#10100e'; color2='#2d2b1b';}
-      if(sec.id==='activity'){color1='#0e1414'; color2='#1a2b2b';}
-      if(sec.id==='goals'){color1='#140e14'; color2='#2b1a2b';}
-      if(sec.id==='contact'){color1='#0e1010'; color2='#1b1d1d';}
-      document.body.style.background=`linear-gradient(135deg,${color1},${color2})`;
-    }
-  });
-});
-
 // 見出し光るラインスクロール
 const headers=document.querySelectorAll('h2');
 window.addEventListener('scroll',()=>{
