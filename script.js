@@ -1,4 +1,4 @@
-// フェードイン＋スクロールアニメーション
+// フェードイン＋スクロール
 const faders = document.querySelectorAll('.fade');
 const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
 const appearOnScroll = new IntersectionObserver((entries, observer) => {
@@ -52,6 +52,11 @@ window.addEventListener('scroll',()=>{
   });
 });
 
+// Minecraftスキン表示（外部画像不要）
+const minecraftUUID = "0e61ffa3-8e42-4d34-98e8-337353ce6c66";
+const minecraftImg = document.getElementById("minecraft-skin");
+minecraftImg.src = `https://crafatar.com/avatars/${minecraftUUID}?size=128&overlay`;
+
 // 見出し光るラインスクロール
 const headers=document.querySelectorAll('h2');
 window.addEventListener('scroll',()=>{
@@ -62,25 +67,5 @@ window.addEventListener('scroll',()=>{
     } else {
       h.style.textShadow='0 0 5px #4ac9ff,0 0 10px #50e3c2';
     }
-  });
-});
-
-// 活動・目標ブロック文字アニメーション
-const extraSections=document.querySelectorAll('#activity,#goals');
-extraSections.forEach(section=>{
-  const items=section.querySelectorAll('p,li,h2,h3');
-  items.forEach((item,i)=>{
-    item.style.opacity=0;
-    item.style.transform='translateY(40px)';
-    item.style.transition=`all 0.7s ease ${i*0.15}s`;
-  });
-  window.addEventListener('scroll',()=>{
-    items.forEach(item=>{
-      const rect=item.getBoundingClientRect();
-      if(rect.top<window.innerHeight*0.85){
-        item.style.opacity=1;
-        item.style.transform='translateY(0)';
-      }
-    });
   });
 });
