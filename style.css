@@ -1,31 +1,456 @@
-/* 前回と同じ、.minecraft-imgあり */
-* {margin:0;padding:0;box-sizing:border-box;}
-body {font-family: 'Arial', sans-serif;background: linear-gradient(135deg,#0e0f14,#1a1c2b);color: #fff;overflow-x:hidden;scroll-behavior:smooth;}
-a{text-decoration:none;color:#4ac9ff;}
-h1,h2,h3{margin-bottom:15px;text-shadow:0 0 10px rgba(0,0,0,0.7);}
-h2{font-size:2.2em;margin-bottom:25px;background: linear-gradient(90deg,#4ac9ff,#50e3c2,#ff6ec7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:textGlow 2.5s ease-in-out infinite alternate;}
-@keyframes textGlow{0%{text-shadow:0 0 5px #4ac9ff,0 0 10px #50e3c2;}50%{text-shadow:0 0 15px #4ac9ff,0 0 20px #50e3c2,0 0 25px #ff6ec7;}100%{text-shadow:0 0 5px #ff6ec7,0 0 10px #50e3c2;}}
-p,li{font-size:1.1em;margin-bottom:15px;line-height:1.6;}
-ul{margin:10px 0 20px 20px;}
-header{position:relative;text-align:center;padding:120px 20px;background:linear-gradient(135deg,#0d0f1a,#1a1c2b);}
-header h1{font-size:3em;color:#50e3c2;text-shadow:2px 2px 15px #4a90e2;}
-nav{margin-top:25px;display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
-nav a{padding:10px 18px;border-radius:25px;font-weight:bold;transition:0.3s;background:rgba(255,255,255,0.05);}
-nav a:hover{background:rgba(255,255,255,0.2);}
-#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-section{padding:120px 20px;max-width:1000px;margin:0 auto;text-align:center;}
-.profile-card{background:rgba(255,255,255,0.08);padding:35px;border-radius:25px;display:inline-block;box-shadow:0 20px 50px rgba(0,0,0,0.7);width:95%;max-width:750px;margin:auto;transition:0.5s;}
-.profile-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 30px 70px rgba(0,0,0,0.8);}
-.skill-list{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:25px;}
-.skill-item{background:rgba(74,201,255,0.25);padding:12px 25px;border-radius:18px;box-shadow:0 7px 20px rgba(0,0,0,0.4);transition:0.3s;}
-.skill-item:hover{transform:scale(1.1);background:rgba(74,201,255,0.45);}
-.valorant-img{width:200px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.6);margin-bottom:20px;transition:transform 0.3s;}
-.valorant-img:hover{transform:scale(1.05) rotate(-2deg);}
-.minecraft-img{width:120px;height:120px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.6);margin-bottom:15px;}
-.btn{display:inline-block;padding:14px 30px;font-size:1.1em;background:linear-gradient(135deg,#50e3c2,#4a90e2);color:white;border-radius:50px;font-weight:bold;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:0.4s;}
-.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 35px rgba(74,201,255,0.7);}
-.fade{opacity:0;transform:translateY(40px);transition:1s ease;}
-.fade.show{opacity:1;transform:translateY(0);}
-.skill-text{opacity:0;transform:translateX(-30px);transition:all 0.6s ease;}
-footer{background:#111;color:white;text-align:center;padding:40px 20px;font-size:0.9em;}
-@media(max-width:768px){h2{font-size:2em;}header h1{font-size:2.2em;}.skill-list{flex-direction:column;}}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Arial', sans-serif;
+  background: #0a0e27;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: #4ac9ff;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #50e3c2;
+}
+
+h1, h2, h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 2.8em;
+  margin-bottom: 35px;
+  background: linear-gradient(135deg, #4ac9ff 0%, #50e3c2 50%, #ff6ec7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+  animation: gradientFlow 3s ease infinite;
+  text-shadow: none;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4ac9ff, #50e3c2, #ff6ec7);
+  border-radius: 2px;
+  animation: expandLine 0.8s ease-out forwards;
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes expandLine {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+p, li {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+ul {
+  margin: 10px 0 20px 20px;
+}
+
+/* ヘッダー - グラスモーフィズム効果 */
+header {
+  position: relative;
+  text-align: center;
+  padding: 140px 20px 100px;
+  background: linear-gradient(135deg, rgba(13, 15, 26, 0.95), rgba(26, 28, 43, 0.95));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(80, 227, 194, 0.1) 0%, transparent 70%);
+  animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+header h1 {
+  font-size: 4em;
+  color: #50e3c2;
+  text-shadow: 0 0 30px rgba(80, 227, 194, 0.5), 0 0 60px rgba(74, 201, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  animation: floatTitle 3s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ナビゲーション - モダンボタン */
+nav {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+nav a {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(80, 227, 194, 0.3), transparent);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+nav a:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+nav a:hover {
+  background: rgba(80, 227, 194, 0.15);
+  border-color: rgba(80, 227, 194, 0.5);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(80, 227, 194, 0.3);
+}
+
+/* 背景キャンバス */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* セクション */
+section {
+  padding: 120px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+/* プロフィールカード - 3D効果 */
+.profile-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  padding: 45px;
+  border-radius: 30px;
+  display: inline-block;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  width: 95%;
+  max-width: 850px;
+  margin: auto;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #4ac9ff, #50e3c2, #ff6ec7, #4ac9ff);
+  border-radius: 30px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: -1;
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.profile-card:hover::before {
+  opacity: 0.3;
+}
+
+.profile-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.7),
+              0 0 50px rgba(80, 227, 194, 0.2);
+}
+
+/* スキルリスト - アニメーション付き */
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.skill-item {
+  background: linear-gradient(135deg, rgba(74, 201, 255, 0.3), rgba(80, 227, 194, 0.2));
+  padding: 15px 28px;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 1px solid rgba(74, 201, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.skill-item:hover::before {
+  left: 100%;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px) scale(1.15);
+  background: linear-gradient(135deg, rgba(74, 201, 255, 0.5), rgba(80, 227, 194, 0.4));
+  box-shadow: 0 15px 40px rgba(74, 201, 255, 0.4);
+  border-color: rgba(80, 227, 194, 0.6);
+}
+
+/* 画像スタイル */
+.valorant-img {
+  width: 220px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  margin-bottom: 25px;
+  transition: all 0.5s ease;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.valorant-img:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 20px 60px rgba(255, 110, 199, 0.4);
+  border-color: rgba(255, 110, 199, 0.5);
+}
+
+.minecraft-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+  border: 3px solid rgba(80, 227, 194, 0.3);
+}
+
+.minecraft-img:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 15px 45px rgba(80, 227, 194, 0.5);
+  border-color: rgba(80, 227, 194, 0.6);
+}
+
+/* ボタン - ネオン効果 */
+.btn {
+  display: inline-block;
+  padding: 16px 40px;
+  font-size: 1.1em;
+  background: linear-gradient(135deg, #50e3c2, #4a90e2);
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.btn:hover {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 20px 45px rgba(74, 201, 255, 0.6),
+              0 0 40px rgba(80, 227, 194, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* スキルテキストリスト */
+.skill-list-text {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.skill-text {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease;
+  padding: 12px 20px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border-left: 4px solid #4ac9ff;
+  text-align: left;
+}
+
+.skill-text.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* フェードインアニメーション */
+.fade {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* フッター */
+footer {
+  background: linear-gradient(135deg, #0d0f1a, #111);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 50px 20px;
+  font-size: 0.95em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #4ac9ff, #50e3c2, #ff6ec7, transparent);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2.2em;
+  }
+  
+  header h1 {
+    font-size: 2.8em;
+  }
+  
+  .skill-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-card {
+    padding: 30px 20px;
+  }
+  
+  nav a {
+    font-size: 0.9em;
+    padding: 10px 20px;
+  }
+  
+  section {
+    padding: 80px 15px;
+  }
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #4ac9ff, #50e3c2);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #50e3c2, #ff6ec7);
+  }
